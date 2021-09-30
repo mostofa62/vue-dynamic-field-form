@@ -4,15 +4,16 @@
     <form @submit.prevent="postData()">
         
       <label for="duration">Number of Inputs:</label>
-      <input v-model="n_of_death" min="0" type="number" @change="addVisa" required>
+      <input v-model="n_of_death"  type="text" @change="addVisa" required>
      <br><br>
-      
+      Array: {{ applicants.length }}
+      Input: {{ n_of_death }}
       <br>
       <div class="name"
       v-for="(applicant, counter) in applicants"
       v-bind:key="counter">
         <span @click="deleteVisa(counter)">x</span>
-        <label for="duration">{{counter+1}}. Name Visa:</label>
+        <label for="duration">{{counter+1}}. Name:</label>
         <input type="text" v-model.lazy="applicant.name" required>
         <label for="duration">Year of relation:</label>
         <input type="text" v-model.lazy="applicant.relation" required> 
@@ -53,7 +54,11 @@ export default {
       }
       if(cp.n_of_death > 0){
 
-        for( var i=0;i<cp.n_of_death;i++){
+        var n = Math.abs(cp.n_of_death - cp.applicants.length);
+        
+
+
+        for( var i=0;i<n;i++){
           this.applicants.push({
             name:'',
             relation: ''
